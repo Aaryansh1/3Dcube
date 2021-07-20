@@ -1,0 +1,172 @@
+:root
+{
+    --boxcolor:#0ff7;
+    --rotatespeed:10s;
+    --bouncespeed:2s;
+}
+body
+{
+background-color: #000;
+min-height: 100vh;
+overflow: hidden;
+display:flex;
+justify-content: center;
+align-items: center;
+font-size: 75px;
+perspective:10em;
+perspective-origin:50% calc(50% - 4em);
+}
+.scene{
+    position: relative;
+    transform-style:preserve-3d;
+    animation: sceneRotate var(--rotatespeed) infinite linear;
+}
+@keyframes sceneRotate {
+    to{transform: rotateY(360deg);}
+    
+}
+.ball{
+    width: 1em;
+    height: 1em;
+    background-color: lightblue;
+    border-radius: 50%;
+    position: absolute;
+    left:-0.5em;
+    bottom: -1em;
+    background-image: radial-gradient(circle at top,lightblue,#000);
+    animation: sceneRotate var(--rotatespeed) infinite linear reverse,
+    ballbounce var(--bouncespeed) infinite ease-in ,
+    ballleave var(--bouncespeed) infinite ,
+    ballrotate var(--bouncespeed) infinite ;
+}
+@keyframes ballbounce {
+    0%{
+        bottom:4em;
+    }
+    50%{
+        bottom: -1em;
+    }
+}
+@keyframes ballleave {
+0%,51%{
+left:-0.5em;
+}
+from{
+    left:-0.5em;
+}
+to{
+    left:12em;
+    opacity:0.5
+}
+}
+.hole{
+    position: absolute;
+    top:0.4em;
+    left:0.4em;
+    width: 60%;
+    height: 60%;
+    border-radius: 50%;
+   background-color: transparent;
+   border:1px solid black ;
+   
+}
+
+.cube{
+    width: 2em;
+    height: 2em;
+    position: absolute;
+left: -1em;
+}
+.collide
+{
+   position: absolute;
+   width: 100%;
+   height: 100%;
+   bottom:1em;
+  
+}
+.top{
+    position: absolute;
+width: 100%;
+height: 100%;
+background-color: var(--boxcolor);
+background-image: radial-gradient(black, 50%);
+transform: translateY(-50%) rotateX(90deg);
+bottom:1em;
+
+}
+
+
+
+
+ .front{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: var(--boxcolor);
+     transform:translateZ(1em);
+     box-shadow: 0em 0em 0.5em #000a inset; 
+     
+}
+    
+    .right{
+        position: absolute;
+width: 100%;
+height: 100%;
+background-color: var(--boxcolor);
+transform: rotateY(90deg) translateZ(1em);
+box-shadow: 0em 0em 0.5em #000a inset;
+bottom:0em;
+animation: gateopen 1s infinite alternate;
+}
+@keyframes gateopen 
+{
+from {
+    bottom:0em;
+}
+to{
+    bottom:2em;
+}
+
+}
+
+.back{
+    box-shadow: 0em 0em 0.5em #000a inset;
+    position: absolute;
+width: 100%;
+height: 100%;
+background-color: var(--boxcolor);
+transform: rotateY(180deg) translateZ(1em);
+bottom:0em;
+
+}
+.left{
+    box-shadow: 0em 0em 0.5em #000a inset;
+    position: absolute;
+width: 100%;
+height: 100%;
+background-color: var(--boxcolor);
+transform: rotateY(270deg) translateZ(1em);
+bottom:0em;
+}
+
+
+.bottom{
+    box-shadow: 0em 0em 0.5em #000;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #0007;
+    bottom: 1em;
+    transform: translateY(50%) rotateX(90deg);
+}
+
+ .floor{
+        position: absolute;
+    top:1em;
+    transform: translate(-50%, -50%) rotateX(90deg);
+    width: 15em;
+    height: 15em;
+    background-image: radial-gradient(#0000,#000 75%), repeating-conic-gradient(from 45deg,#111 0deg 90deg,#222 90deg 180deg);
+    background-size: 100%, 1em 1em;
+}
